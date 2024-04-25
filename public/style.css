@@ -1,0 +1,56 @@
+.offer-banner-full-shoppingCar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 30%;
+  height: auto;
+  background: rgba(255, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.offer-banner-full {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: auto;
+  background: rgba(255, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: scale-down;
+  padding: 10px;
+}
+
+.card-title-top {
+  width: 100%;
+  height: 100px;
+  object-fit: scale-down;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.custom-tooltip-card {
+  width: 100%;
+  height: 60px;
+  object-fit: scale-down;
+  padding: 10px;
+  font-size: 15px;
+}

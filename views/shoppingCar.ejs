@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de compras</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand">Tienda Online</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/Shopping">Historial de compras</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Carrito de Compras</h1>
+        <div class="row">
+            <% let totalCompra=0; %>
+                <% productosCarrito.forEach((producto, index)=> { %>
+                    <div>
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <% if (producto.discount_percentage !==0 || producto.discounted_amount !==0 ||
+                                        producto.final_price !==0) { %>
+                                        <div class="offer-banner-full-shoppingCar">De Oferta</div>
+                                        <% } %>
+                                            <img src="<%= producto.image %>" class="card-img-top">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <%= producto.title %>
+                                        </h5>
+                                        <p class="card-text">
+                                            <% if (producto.discount_percentage !==0 || producto.discounted_amount !==0
+                                                || producto.final_price !==0) { %>
+                                                Precio con descuento: $<%= producto.final_price.toFixed(2) %>
+                                                    <% } else { %>
+                                                        Precio: $<%= producto.price.toFixed(2) %>
+                                                            <% } %>
+                                        </p>
+                                        <div class="d-flex flex-column">
+                                            <div class="btn-group mb-2 col-3" role="group" aria-label="Cantidad">
+                                                <span class="mr-2">Cantidad:&nbsp;&nbsp;&nbsp;</span>
+                                                <button type="button"
+                                                    onclick="disminuirCantidad('<%= index %>', '<%= producto.id %>')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                                    </svg>
+                                                </button>
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    id="cantidad_<%= index %>_btn"
+                                                    data-price="<%= producto.discount_percentage !== 0 || producto.discounted_amount !== 0 || producto.final_price !== 0 ? producto.final_price : producto.price %>"
+                                                    onclick="disminuirCantidad(<%= index %>, <%= producto.id %>)">
+                                                    <%= producto.quantity %>
+                                                </button>
+                                                <button type="button"
+                                                    onclick="aumentarCantidad(<%= index %>, <%= producto.id %>)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <button type="button" class="btn btn-link col-2"
+                                                onclick="eliminarProducto(<%= producto.id %>)">Eliminar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% if (producto.discount_percentage !==0 || producto.discounted_amount !==0 || producto.final_price
+                        !==0) { %>
+                        <% totalCompra +=producto.final_price * producto.quantity; %>
+                            <% } else { %>
+                                <% totalCompra +=producto.price * producto.quantity; %>
+                                    <% } %>
+                                        <% }) %>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Total de la compra: $<span id="totalCompra">
+                        <%= totalCompra.toFixed(2) %>
+                    </span></h3>
+            </div>
+        </div>
+        <form class="d-flex" role="search" onsubmit="enviarCompra(event)">
+            <button type="submit" class="btn btn-success" <%=productosCarrito.length===0 ? 'disabled' : ''
+                %>>Comprar</button>
+        </form>
+    </div>
+
+    <footer class="py-3 my-4">
+        <p class="text-center text-muted">© 2024 Agostina Company, Inc</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>

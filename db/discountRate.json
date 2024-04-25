@@ -1,0 +1,22 @@
+[
+  {
+    "id": 5,
+    "discount_percentage": 10
+  },
+  {
+    "id": 3,
+    "discount_percentage": 15
+  },
+  {
+    "id": 6,
+    "discount_percentage": 20
+  },
+  {
+    "id": 8,
+    "discount_percentage": 5
+  },
+  {
+    "id": 15,
+    "discount_percentage": 25
+  }
+]

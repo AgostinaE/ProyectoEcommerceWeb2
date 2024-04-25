@@ -1,0 +1,69 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand">Tienda Online</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/Shopping">Historial de compras</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Historial de compras</h1>
+        <% compras.forEach((compra)=> {%>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Compra realizada el <%= compra.fecha %>
+                    </h5>
+                    <p class="card-text">Total de la compra: <%= compra.totalCompra %>
+                    </p>
+                    <ul class="list-group">
+                        <% compra.productos.forEach((producto)=> { %>
+                            <li class="list-group-item">
+                                <%= producto.title %> - Precio:
+                                    <% if (producto.discount_percentage !==0 || producto.discounted_amount !==0 ||
+                                        producto.final_price !==0) { %>
+                                        <%= producto.final_price %>
+                                            <% } else { %>
+                                                <%= producto.price %>
+                                                    <% } %>
+                                                        - Cantidad: <%= producto.quantity %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+    <footer class="py-3 my-4">
+        <p class="text-center text-muted">© 2024 Agostina Company, Inc</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

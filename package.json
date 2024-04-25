@@ -1,0 +1,19 @@
+{
+  "name": "proyectoecommerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "node-google-translate-skidz": "^1.1.2",
+    "popper.js": "^1.16.1"
+  }
+}
